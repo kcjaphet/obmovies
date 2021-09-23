@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: gunicorn run:app --bind 0.0.0.0:5000
+    ports:
+      - 5001:5000
+  nginx:
+    build: ./nginx
+    ports:
+      - 70:70
+    depends_on:
+      - web
